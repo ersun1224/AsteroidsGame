@@ -1,26 +1,89 @@
-//your variable declarations here
+SpaceShip bob;
 public void setup() 
 {
-  //your code here
+  size(800,800);
+  bob = new SpaceShip();
 }
 public void draw() 
 {
-  //your code here
+  background(0);
+  bob.move();
+  bob.show();
 }
-class SpaceShip //extends Floater  
-{   
-    SpaceShip() {
-      corners = 3;
-      xCorners = new int[corners];
-      yCorners = new int[corners];
-      xCorners[0] = -8;
-      yCorners[0] = -8;
-      xCorners[1] = 16;
-      yCorners[1] = 0;
-      xCorners[2] = -8;
-      yCorners[2] = 8;
 
-    }
+void keyPressed() {
+  if(key == 32) {
+    bob.accelerate(0.1);
+  }
+
+  if(key == 8) {
+    bob.accelerate(-0.1);
+  }
+
+  if(key == 100) {
+    bob.rotate(3);
+  }
+
+  if(key == 102) {
+    bob.rotate(-3);
+  }
+}
+
+class SpaceShip extends Floater  
+{   
+  SpaceShip() {
+    corners = 4;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -12;
+    yCorners[0] = -10;
+    xCorners[1] = 24;
+    yCorners[1] = 0;
+    xCorners[2] = -12;
+    yCorners[2] = 10;
+    xCorners[3] = -4;
+    yCorners[3] = 0;
+
+    myColor = 255;
+
+    myCenterX = 400;
+    myCenterY = 400;
+
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+  }
+
+  public void setX(int x) {
+    myCenterX = x;
+  }
+  public int getX() {
+    return (int)myCenterX;
+  }
+  public void setY(int y) {
+    myCenterY = y;
+  }
+  public int getY() {
+    return (int)myCenterY;
+  }
+  public void setDirectionX(double x) {
+    myDirectionX = x;
+  }
+  public double getDirectionX() {
+    return myDirectionX;
+  }
+  public void setDirectionY(double y) {
+    myDirectionY = y;
+  }
+  public double getDirectionY() {
+    return myDirectionY;
+  }
+  public void setPointDirection(int degrees) {
+    myPointDirection = degrees;
+  }
+  public double getPointDirection() {
+    return myPointDirection;
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
