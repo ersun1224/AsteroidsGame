@@ -11,38 +11,52 @@ public void draw()
   bob.show();
 }
 
-void keyPressed() {
+public void keyPressed() {
   if(key == 32) {
     bob.accelerate(0.1);
   }
 
-  if(key == 8) {
-    bob.accelerate(-0.1);
+  if(key == 'a') {
+    bob.rotate(-10);
   }
 
-  if(key == 100) {
-    bob.rotate(3);
+  if(key == 'd') {
+    bob.rotate(10);
   }
 
-  if(key == 102) {
-    bob.rotate(-3);
+  if(key == '1') {
+    int x1 = bob.getX();
+    int y1 = bob.getY();
+    bob.setX((int)(Math.random()*800));
+    bob.setY((int)(Math.random()*800));
+    int x2 = bob.getX();
+    int y2 = bob.getY();
+    bob.setPointDirection((int)(Math.random() * 360));
+    fill(255);
+    line(x1, y1, x2, y2);
   }
 }
 
 class SpaceShip extends Floater  
 {   
   SpaceShip() {
-    corners = 4;
+    corners = 7;
     xCorners = new int[corners];
     yCorners = new int[corners];
     xCorners[0] = -12;
     yCorners[0] = -10;
-    xCorners[1] = 24;
-    yCorners[1] = 0;
-    xCorners[2] = -12;
-    yCorners[2] = 10;
-    xCorners[3] = -4;
+    xCorners[1] = 0;
+    yCorners[1] = -8;
+    xCorners[2] = 10;
+    yCorners[2] = -2;
+    xCorners[3] = 24;
     yCorners[3] = 0;
+    xCorners[4] = 22;
+    yCorners[4] = 5;
+    xCorners[5] = -12;
+    yCorners[5] = 10;
+    xCorners[6] = -4;
+    yCorners[6] = 0;
 
     myColor = 255;
 
@@ -162,3 +176,13 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
 } 
 
+class Star {
+  int myX, myY, myColor
+
+  Star() {
+    myX = (int)(Math.random()*800)
+    myY = (int)(Math.random()*800)
+    myColor = 255;
+  }
+  
+}
