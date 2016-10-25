@@ -36,7 +36,7 @@ public void keyPressed() {
     bob.rotate(10);
   }
 
-  if(key == '1') {
+  if(key == 'r') {
     int x1 = bob.getX();
     int y1 = bob.getY();
     bob.setX((int)(Math.random()*800));
