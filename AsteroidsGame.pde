@@ -1,12 +1,24 @@
 SpaceShip bob;
+Star joe[];
 public void setup() 
 {
   size(800,800);
+
   bob = new SpaceShip();
+  joe = new Star[700];
+  for(int i = 0; i < joe.length; i++) {
+    joe[i] = new Star();
+  }
 }
 public void draw() 
 {
   background(0);
+
+  for(int i = 0; i < joe.length; i++) {
+    joe[i].show();
+    joe[i].move();
+  }
+
   bob.move();
   bob.show();
 }
@@ -177,12 +189,32 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 } 
 
 class Star {
-  int myX, myY, myColor
+  private int myX, myY, myColor;
 
-  Star() {
-    myX = (int)(Math.random()*800)
-    myY = (int)(Math.random()*800)
+  public Star() {
+    myX = (int)(Math.random()*800);
+    myY = (int)(Math.random()*800);
     myColor = 255;
   }
   
+  public void show() {
+    fill(myColor);
+    point(myX, myY);
+  }
+
+  public void move() {
+    if (frameCount % 10 == 0) {
+      myX = myX - 2;
+      myY = myY + 1;
+      if(myX < 0) {
+        myX = 800;
+      }
+
+      if(myY > 800) {
+        myY = 0;
+      }
+    }
+
+  }
+
 }
