@@ -6,11 +6,11 @@ public void setup()
   size(800,800);
 
   bob = new SpaceShip();
+  rocks = new Asteroid();
   joe = new Star[700];
   for(int i = 0; i < joe.length; i++) {
     joe[i] = new Star();
   }
-  rocks = new Asteroid();
 }
 
 
@@ -54,6 +54,9 @@ public void keyPressed() {
     bob.setPointDirection((int)(Math.random() * 360));
     fill(255);
     line(x1, y1, x2, y2);
+
+    bob.setDirectionX(0);
+    bob.setDirectionY(0);
   }
 }
 
@@ -78,7 +81,7 @@ class SpaceShip extends Floater
     xCorners[6] = -4;
     yCorners[6] = 0;
 
-    myColor = 255;
+    myColor = color(255);
 
     myCenterX = 400;
     myCenterY = 400;
@@ -124,6 +127,10 @@ class Asteroid extends Floater {
   private int rotationSpeed;
   public Asteroid() {
     rotationSpeed = (int)(Math.random()*3-1);
+    while (rotationSpeed == 0) {
+      rotationSpeed = (int)(Math.random()*3-1);
+    }
+
     corners = 7;
     xCorners = new int[corners];
     yCorners = new int[corners];
@@ -142,7 +149,7 @@ class Asteroid extends Floater {
     xCorners[6] = -4;
     yCorners[6] = 0;
 
-    myColor = 255; 
+    myColor = color(146,72,72); 
 
     myCenterX = (int)(Math.random()*800);
     myCenterY = (int)(Math.random()*800);
@@ -184,8 +191,8 @@ class Asteroid extends Floater {
 
   public void move() {
     myPointDirection += rotationSpeed;
-    myCenterX += myDirectionX;    
-    myCenterY += myDirectionY;
+    myCenterX += (int)(Math.random()*3-3);    
+    myCenterY += 1;
 
 
     double dRadians =myPointDirection*(Math.PI/180);  
@@ -296,11 +303,11 @@ class Star {
   public Star() {
     myX = (int)(Math.random()*800);
     myY = (int)(Math.random()*800);
-    myColor = 255;
+    myColor = color(255);
   }
   
   public void show() {
-    fill(myColor);
+    stroke(myColor);
     point(myX, myY);
   }
 
