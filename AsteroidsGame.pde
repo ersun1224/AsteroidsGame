@@ -1,12 +1,17 @@
 SpaceShip bob;
 Star joe[];
-Asteroid rocks;
+Asteroid rocks[];
 public void setup() 
 {
   size(800,800);
 
   bob = new SpaceShip();
-  rocks = new Asteroid();
+
+  rocks = new Asteroid[20];
+  for(int i = 0; i < rocks.length; i++) {
+    rocks[i] = new Asteroid();
+  }
+
   joe = new Star[700];
   for(int i = 0; i < joe.length; i++) {
     joe[i] = new Star();
@@ -24,11 +29,13 @@ public void draw()
     joe[i].move();
   }
 
+  for(int i = 0; i < rocks.length; i++) {
+    rocks[i].move();
+    rocks[i].show();
+  }
+
   bob.move();
   bob.show();
-
-  rocks.move();
-  rocks.show();
 }
 
 public void keyPressed() {
@@ -81,6 +88,7 @@ class SpaceShip extends Floater
     xCorners[6] = -4;
     yCorners[6] = 0;
 
+
     myColor = color(255);
 
     myCenterX = 400;
@@ -124,30 +132,34 @@ class SpaceShip extends Floater
 }
 
 class Asteroid extends Floater {
-  private int rotationSpeed;
+  private int rotationSpeed,moveSpeedX;
   public Asteroid() {
-    rotationSpeed = (int)(Math.random()*3-1);
+    rotationSpeed = (int)(Math.random()*9-4);
     while (rotationSpeed == 0) {
-      rotationSpeed = (int)(Math.random()*3-1);
+      rotationSpeed = (int)(Math.random()*9-4);
     }
+
+    moveSpeedX = (int)(Math.random()*3-1);
+
+
 
     corners = 7;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = -12;
-    yCorners[0] = -10;
-    xCorners[1] = 0;
-    yCorners[1] = -8;
-    xCorners[2] = 10;
-    yCorners[2] = -2;
-    xCorners[3] = 24;
-    yCorners[3] = 0;
-    xCorners[4] = 22;
-    yCorners[4] = 5;
-    xCorners[5] = -12;
-    yCorners[5] = 10;
-    xCorners[6] = -4;
-    yCorners[6] = 0;
+    xCorners[0] = -8;
+    yCorners[0] = 10;
+    xCorners[1] = -14;
+    yCorners[1] = -2;
+    xCorners[2] = -8;
+    yCorners[2] = -10;
+    xCorners[3] = -2;
+    yCorners[3] = -14;
+    xCorners[4] = 6;
+    yCorners[4] = -12;
+    xCorners[5] = 10;
+    yCorners[5] = -4;
+    xCorners[6] = 8;
+    yCorners[6] = 6;
 
     myColor = color(146,72,72); 
 
@@ -191,7 +203,7 @@ class Asteroid extends Floater {
 
   public void move() {
     myPointDirection += rotationSpeed;
-    myCenterX += (int)(Math.random()*3-3);    
+    myCenterX += moveSpeedX;  
     myCenterY += 1;
 
 
