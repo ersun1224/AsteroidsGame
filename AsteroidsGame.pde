@@ -44,11 +44,11 @@ public void keyPressed() {
   }
 
   if(key == 'a') {
-    bob.rotate(-10);
+    bob.rotate(-5);
   }
 
   if(key == 'd') {
-    bob.rotate(10);
+    bob.rotate(5);
   }
 
   if(key == 'r') {
@@ -128,6 +128,10 @@ class SpaceShip extends Floater
   }
   public double getPointDirection() {
     return myPointDirection;
+  }
+
+  public void move() {
+    super.move();
   }
 }
 
