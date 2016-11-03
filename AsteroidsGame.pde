@@ -7,7 +7,7 @@ public void setup()
 
   bob = new SpaceShip();
 
-  rocks = new Asteroid[30];
+  rocks = new Asteroid[50];
   for(int i = 0; i < rocks.length; i++) {
     rocks[i] = new Asteroid();
   }
@@ -130,6 +130,13 @@ class SpaceShip extends Floater
     return myPointDirection;
   }
 
+  public void accelerate(double dAmount) {
+    super.accelerate(dAmount);
+    fill(123,123,123);
+    noStroke();
+    rect((int)myCenterX-20,(int)myCenterY-10,10,20);
+  }
+
   public void move() {
     super.move();
   }
@@ -143,9 +150,9 @@ class Asteroid extends Floater {
       rotationSpeed = (int)(Math.random()*9-4);
     }
 
-    moveSpeedX = (int)((Math.random()*4)-1);
+    moveSpeedX = (int)((Math.random()*5)-2);
     while (moveSpeedX == 0) {
-      moveSpeedX = (int)((Math.random()*4)-1);
+      moveSpeedX = (int)((Math.random()*5)-2);
     }
 
 
