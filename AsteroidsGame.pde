@@ -1,15 +1,15 @@
 SpaceShip bob;
 Star joe[];
-Asteroid rocks[];
+ArrayList <Asteroid> rocks;
 public void setup() 
 {
   size(800,800);
 
   bob = new SpaceShip();
 
-  rocks = new Asteroid[50];
-  for(int i = 0; i < rocks.length; i++) {
-    rocks[i] = new Asteroid();
+  rocks = new ArrayList <Asteroid>();
+  for(int i = 0; i < 100; i++) {
+    rocks.add(new Asteroid());
   }
 
   joe = new Star[700];
@@ -22,16 +22,21 @@ public void setup()
 public void draw() 
 {
   fill(0,0,0,150);
-  rect(0,0,800,800);
+  rect(-10,-10,820,820);
 
   for(int i = 0; i < joe.length; i++) {
     joe[i].show();
     joe[i].move();
   }
 
-  for(int i = 0; i < rocks.length; i++) {
-    rocks[i].move();
-    rocks[i].show();
+  for(int i = 0; i < rocks.size() ; i++) {
+    if(dist(rocks.get(i).getX(), rocks.get(i).getY(), bob.getX(),bob.getY()) < 20) {
+      rocks.get(i).setX(1000000);
+      rocks.get(i).setY(1000000);
+    }
+
+    rocks.get(i).move();
+    rocks.get(i).show();
   }
 
   bob.move();
@@ -128,13 +133,6 @@ class SpaceShip extends Floater
   }
   public double getPointDirection() {
     return myPointDirection;
-  }
-
-  public void accelerate(double dAmount) {
-    super.accelerate(dAmount);
-    fill(123,123,123);
-    noStroke();
-    rect((int)myCenterX-20,(int)myCenterY-10,10,20);
   }
 
   public void move() {
