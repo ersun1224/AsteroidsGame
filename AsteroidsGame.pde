@@ -30,13 +30,11 @@ public void draw()
   }
 
   for(int i = 0; i < rocks.size() ; i++) {
-    if(dist(rocks.get(i).getX(), rocks.get(i).getY(), bob.getX(),bob.getY()) < 20) {
-      rocks.get(i).setX(1000000);
-      rocks.get(i).setY(1000000);
-    }
-
     rocks.get(i).move();
     rocks.get(i).show();
+    if(dist(rocks.get(i).getX(), rocks.get(i).getY(), bob.getX(),bob.getY()) < 30) {
+      rocks.remove(i);
+    }
   }
 
   bob.move();
