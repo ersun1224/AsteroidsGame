@@ -1,6 +1,7 @@
 SpaceShip bob;
 Star joe[];
 ArrayList <Asteroid> rocks;
+ArrayList <Bullet> bullets;
 public void setup() 
 {
   size(800,800);
@@ -12,11 +13,15 @@ public void setup()
     rocks.add(new Asteroid());
   }
 
+  bullets = new ArrayList <Bullet>();
+
   joe = new Star[700];
   for(int i = 0; i < joe.length; i++) {
     joe[i] = new Star();
   }
+
 }
+
 
 
 public void draw() 
@@ -34,7 +39,16 @@ public void draw()
     rocks.get(i).show();
     if(dist(rocks.get(i).getX(), rocks.get(i).getY(), bob.getX(),bob.getY()) < 30) {
       rocks.remove(i);
+      i--;
     }
+  }
+  if(mousePressed == true) {
+    bullets.add(new Bullet(bob));
+  }
+
+  for(int i = 0; i < bullets.size(); i++) {
+    bullets.get(i).move();
+    bullets.get(i).show();
   }
 
   bob.move();
@@ -47,11 +61,11 @@ public void keyPressed() {
   }
 
   if(key == 'a') {
-    bob.rotate(-5);
+    bob.rotate(-8);
   }
 
   if(key == 'd') {
-    bob.rotate(5);
+    bob.rotate(8);
   }
 
   if(key == 'r') {
@@ -68,7 +82,15 @@ public void keyPressed() {
     bob.setDirectionX(0);
     bob.setDirectionY(0);
   }
+
+  if(key == 'p') {
+    for(int i = 0; i < 100; i++) {
+      rocks.add(new Asteroid());
+    }
+  }
+
 }
+
 
 class SpaceShip extends Floater  
 {   
@@ -242,8 +264,62 @@ class Asteroid extends Floater {
       myCenterY = height;    
     }  
   }
-
 }
+
+class Bullet extends Floater {
+  public Bullet(SpaceShip bob) {
+    myCenterX = bob.myCenterX;
+    myCenterY = bob.myCenterY;
+    myPointDirection = bob.myPointDirection;
+    double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX = 5 * Math.cos(dRadians) + bob.myDirectionX;
+    myDirectionY = 5 * Math.sin(dRadians) + bob.myDirectionY;
+  }
+
+  public void show() {
+    stroke(0,255,0);
+    strokeWeight(2);
+    point((float)myCenterX, (float)myCenterY);
+    strokeWeight(1);
+  }
+
+  public void move() {
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;   
+  }
+
+  public void setX(int x) {
+    myCenterX = x;
+  }
+  public int getX() {
+    return (int)myCenterX;
+  }
+  public void setY(int y) {
+    myCenterY = y;
+  }
+  public int getY() {
+    return (int)myCenterY;
+  }
+  public void setDirectionX(double x) {
+    myDirectionX = x;
+  }
+  public double getDirectionX() {
+    return myDirectionX;
+  }
+  public void setDirectionY(double y) {
+    myDirectionY = y;
+  }
+  public double getDirectionY() {
+    return myDirectionY;
+  }
+  public void setPointDirection(int degrees) {
+    myPointDirection = degrees;
+  }
+  public double getPointDirection() {
+    return myPointDirection;
+  }
+}
+
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -348,8 +424,6 @@ class Star {
         myY = 0;
       }
     }
-
   }
-
 }
 
