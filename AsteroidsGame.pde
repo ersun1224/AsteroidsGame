@@ -2,6 +2,7 @@ SpaceShip bob;
 Star joe[];
 ArrayList <Asteroid> rocks;
 ArrayList <Bullet> bullets;
+int bulletColor;
 public void setup() 
 {
   size(800,800);
@@ -42,7 +43,18 @@ public void draw()
       i--;
     }
   }
-  if(mousePressed == true) {
+  if((mousePressed == true && mouseButton == LEFT) && frameCount%2 == 0) {
+    bulletColor = color(0,255,0);
+    bullets.add(new Bullet(bob));
+  }
+
+  if(mousePressed == true && mouseButton == RIGHT) {
+    bulletColor = color(239,69,69);
+    bullets.add(new Bullet(bob));
+  }
+
+  if(mousePressed == true && mouseButton == CENTER) {
+    bulletColor = color(130,169,220);
     bullets.add(new Bullet(bob));
   }
 
@@ -272,12 +284,12 @@ class Bullet extends Floater {
     myCenterY = bob.myCenterY;
     myPointDirection = bob.myPointDirection;
     double dRadians =myPointDirection*(Math.PI/180);
-    myDirectionX = 5 * Math.cos(dRadians) + bob.myDirectionX;
-    myDirectionY = 5 * Math.sin(dRadians) + bob.myDirectionY;
+    myDirectionX = 10 * Math.cos(dRadians) + bob.myDirectionX;
+    myDirectionY = 10 * Math.sin(dRadians) + bob.myDirectionY;
   }
 
   public void show() {
-    stroke(0,255,0);
+    stroke(bulletColor);
     strokeWeight(2);
     point((float)myCenterX, (float)myCenterY);
     strokeWeight(1);
