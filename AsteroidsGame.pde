@@ -39,17 +39,17 @@ public void draw()
     rocks.get(i).show();
   }
 
-  if ((mousePressed == true && mouseButton == LEFT) && frameCount%2 == 0) {
+  if ((mousePressed == true && mouseButton == LEFT) && frameCount%6 == 0) {
     bulletColor = color(0, 255, 0);
     bullets.add(new Bullet(bob));
   }
 
-  if (mousePressed == true && mouseButton == RIGHT) {
+  if ((mousePressed == true && mouseButton == RIGHT) && frameCount%6 == 0) {
     bulletColor = color(239, 69, 69);
     bullets.add(new Bullet(bob));
   }
 
-  if (mousePressed == true && mouseButton == CENTER) {
+  if ((mousePressed == true && mouseButton == CENTER) && frameCount%6 == 0) {
     bulletColor = color(130, 169, 220);
     bullets.add(new Bullet(bob));
   }
@@ -70,6 +70,21 @@ public void draw()
     }
   }
 
+  for(int i = 0; i < rocks.size(); i++) {
+    if (rocks.get(i).getX() < -100){
+      rocks.remove(this);
+    }
+    if (rocks.get(i).getX() < 900){
+      rocks.remove(this);
+    }
+    if (rocks.get(i).getY() < -100){
+      rocks.remove(this);
+    }
+    if (rocks.get(i).getY() < 900){
+      rocks.remove(this);
+    }
+  }
+
   bob.move();
   bob.show();
 }
@@ -80,11 +95,11 @@ public void keyPressed() {
   }
 
   if (key == 'a') {
-    bob.rotate(-8);
+    bob.rotate(-10);
   }
 
   if (key == 'd') {
-    bob.rotate(8);
+    bob.rotate(10);
   }
 
   if (key == 'r') {
